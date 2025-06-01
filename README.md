@@ -6,7 +6,7 @@ This project demonstrates a serverless approach to image processing using AWS se
 
 ## Project Architecture
 
-
+![image.png](Architecture.png)
 
 ## Key Features
 
