@@ -11,34 +11,34 @@ This project demonstrates a serverless approach to image processing using AWS se
 ## Key Features
 
 - **Automatic Image Processing:** When an image is uploaded to the raw images bucket, a Lambda function is triggered automatically.
-- **Watermarking:** The Lambda function adds a large, semi-transparent watermark text to the image using an SVG overlay.
+- **Watermarking:** The Lambda function adds a large watermark text to the image using the Sharp library.
 - **Storage Separation:** Raw images and processed images are stored in separate S3 buckets (`rawimagestore` and `processimagestore` respectively), maintaining a clean and organized workflow.
 - **Serverless and Scalable:** The solution requires no server management and scales automatically with the volume of images processed.
-- **Efficient Image Manipulation:** Uses the Sharp library within Lambda for fast and high-quality image processing.
+- **Efficient Image Manipulation:** Uses the Sharp library within a Node.js Lambda function for fast and high-quality image processing.
 - **Cost-Effective:** Uses AWS’s pay-as-you-go model with minimal operational overhead.
 
 ## Components Used
 
 - **Amazon S3:** Object storage service used to store both raw and processed images.
 - **AWS Lambda:** Serverless compute service that runs the image processing code triggered by S3 events.
-- **Sharp:** A high-performance Node.js image processing library used to manipulate images inside Lambda.
+- **Sharp (Node.js Image Processing Library):** A fast, high-performance image manipulation library used in the Lambda function.
 
 ## How It Works
 
 1. An image is uploaded to the designated raw images bucket (`rawimagestore`).
 2. This upload triggers the Lambda function via an S3 event notification.
 3. The Lambda function downloads the raw image from S3.
-4. It creates an SVG watermark with the text "mandalorian" in large font and semi-transparent style.
-5. The watermark is composited over the original image at the bottom right corner.
+4. It generates an SVG overlay with the watermark text "mandalorian" in large font and semi-transparent white color.
+5. The SVG is composited over the image using Sharp.
 6. The processed image is then uploaded to the processed images bucket (`processimagestore`).
 
 ## Output
 
-# RawImage
+### Raw Image
 
 ![image.png](demonslayer.png)
 
-# Processed Image
+### Processed Image
 
 ![image.png](demonslayerprocess.png)
 
@@ -46,7 +46,7 @@ This project demonstrates a serverless approach to image processing using AWS se
 
 - **Automated Workflow:** Removes the need for manual image processing.
 - **No Infrastructure Management:** Fully serverless, so no servers to provision or maintain.
-- **Customizable Watermark:** The watermark text, size, color, opacity, and position can be easily customized.
+- **Customizable Watermark:** The watermark text, size, color, opacity, and position can be easily customized using SVG.
 - **Highly Available:** Leveraging AWS infrastructure ensures high availability and durability of stored images.
 
 ## Use Cases
@@ -60,7 +60,7 @@ This project demonstrates a serverless approach to image processing using AWS se
 
 - AWS Account with appropriate permissions for Lambda and S3.
 - Configured S3 buckets for raw and processed images.
-- Lambda function with deployment package including Sharp library.
+- Lambda function written in Node.js with Sharp included in the deployment package or layer.
 - Proper IAM role permissions for Lambda to access S3.
 
 ## Deployment & Configuration
@@ -73,10 +73,8 @@ This project demonstrates a serverless approach to image processing using AWS se
 
 ## Future Enhancements
 
-- Support for multiple watermark styles or images.
+- Support for multiple watermark styles or text formats.
 - Configurable watermark positioning via metadata or environment variables.
 - Processing of various image formats and resizing.
 - Integration with other AWS services like SNS for notifications or DynamoDB for logging.
 - Web interface or API to upload and manage images.
-
-
