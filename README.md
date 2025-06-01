@@ -32,6 +32,16 @@ This project demonstrates a serverless approach to image processing using AWS se
 5. The watermark is composited over the original image at the bottom right corner.
 6. The processed image is then uploaded to the processed images bucket (`processimagestore`).
 
+##Output
+
+#RawImage
+
+![image.png](demonslayer.png)
+
+#Processed Image
+
+![image.png](demonslayerprocess.png)
+
 ## Benefits
 
 - **Automated Workflow:** Removes the need for manual image processing.
